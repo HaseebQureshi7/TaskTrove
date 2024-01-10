@@ -84,13 +84,13 @@ function Login() {
         {/* header */}
         <Box sx={{ ...DFlex }}>
           <Typography variant="h5">LOG IN</Typography>
-          <Typography sx={{ color: "grey" }} variant="body2">
+          <Typography sx={{ color: "grey", textAlign:'center' }} variant="body2">
             Welcome back! Please enter your details
           </Typography>
         </Box>
         {/* login-form */}
         <Box
-          sx={{ ...DFlex, width: "100%", gap: 5, paddingX: 10 }}
+          sx={{ ...DFlex, width: "100%", gap: 5, paddingX: {xs:2.5, lg:10} }}
           component={"form"}
           onSubmit={HandleLogin}
         >
@@ -155,7 +155,7 @@ function Login() {
                 onClick={() =>
                   navigate("/signup", { state: { role: state?.role } })
                 }
-                sx={{ textTransform: "capitalize", fontWeight: 600 }}
+                sx={{ textTransform: "capitalize", fontWeight: 500 }}
               >
                 Signup here
               </Button>

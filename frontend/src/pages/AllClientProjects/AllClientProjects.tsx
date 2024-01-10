@@ -44,9 +44,8 @@ function AllClientProjects() {
         {/* PROJECT CARD */}
         {allClientProjects?.map((project: ProjectTypes, index: number) => {
           return (
-            <FadeFromSide delay={index / 10}>
+            <FadeFromSide key={project._id} delay={index / 10}>
               <ProjectCard
-                key={project._id}
                 project={project}
                 setOpenModal={setOpenModal}
                 setCurrentProject={setCurrentProject}

@@ -10,11 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  FormEvent,
-  useContext,
-  useState,
-} from "react";
+import { FormEvent, useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Typewriter from "react-ts-typewriter";
 import { FadeFromSide, FadeIn } from "../animations/PageTransition";
@@ -117,19 +113,17 @@ function ProjectCard({
     return useAxios.delete(`/project/removeProject/${project?._id}`);
   };
 
-  const { mutate: RemoveProjectMutatation } = useMutation(
-    {
-      mutationFn: RemoveProject,
-      onSuccess: () => {
-        QueryClient.invalidateQueries({ queryKey: ["allOpenProjects"] });
-        setOpenSnack({
-          open: true,
-          message: `The project was removed! 🎉`,
-          severity: "info",
-        });
-      },
-    }
-  );
+  const { mutate: RemoveProjectMutatation } = useMutation({
+    mutationFn: RemoveProject,
+    onSuccess: () => {
+      QueryClient.invalidateQueries({ queryKey: ["allOpenProjects"] });
+      setOpenSnack({
+        open: true,
+        message: `The project was removed! 🎉`,
+        severity: "info",
+      });
+    },
+  });
 
   function HandleAcceptBid(e: FormEvent) {
     e.preventDefault();
@@ -151,6 +145,7 @@ function ProjectCard({
 
   return (
     <Box
+      key={project._id}
       sx={{
         ...DFlex,
         width: "100%",

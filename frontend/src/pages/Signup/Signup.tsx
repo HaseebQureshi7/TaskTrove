@@ -117,7 +117,7 @@ function Signup() {
         </Box>
         {/* signup-form */}
         <Box
-          sx={{ ...DFlex, width: "100%", gap: 2.5, paddingX: 10 }}
+          sx={{ ...DFlex, width: "100%", gap: 2.5, paddingX: {xs:2.5, lg:10} }}
           component={"form"}
           onSubmit={HandleSignup}
         >
@@ -217,7 +217,7 @@ function Signup() {
             Already a member?
             <Button
               onClick={() => navigate("/login")}
-              sx={{ textTransform: "capitalize", fontWeight: 600 }}
+              sx={{ textTransform: "capitalize", fontWeight: 500 }}
             >
               Login here
             </Button>
