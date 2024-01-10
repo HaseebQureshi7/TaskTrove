@@ -1,0 +1,1 @@
+export type authRoles = "admin" | "client" | "freelancer";
