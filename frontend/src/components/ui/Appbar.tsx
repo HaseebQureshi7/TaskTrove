@@ -1,10 +1,10 @@
-import { Add, DarkMode, LightMode, Menu } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
+import { DarkMode, LightMode, Menu } from "@mui/icons-material";
+import { Box } from "@mui/material";
 import DFlex from "./../../styles/Flex";
 import DarkModeContext from "../../context/DarkModeContext";
 import { useContext } from "react";
 
-export default function Appbar({ userData, openSidebar, setOpenSidebar }: any) {
+export default function Appbar({ openSidebar, setOpenSidebar }: any) {
   const { themeMode, setThemeMode } = useContext(DarkModeContext);
   return (
     <>

@@ -11,9 +11,7 @@ import {
 } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  Dispatch,
   FormEvent,
-  SetStateAction,
   useContext,
   useState,
 } from "react";
@@ -24,7 +22,6 @@ import SnackbarContext from "../context/SnackbarContext";
 import UserDataContext from "../context/UserDataContext";
 import useAxios from "../hooks/useAxios";
 import BidTypes from "../types/BidTypes";
-import ProjectTypes from "../types/ProjectTypes";
 import { SnackBarContextTypes } from "../types/SnackbarTypes";
 import UserDataContextTypes from "../types/UserDataContextTypes";
 import DateFormatter from "../utils/DateFormatter";
@@ -55,7 +52,7 @@ function ProjectCard({
     return useAxios.get(`review/reviewsByProjectId/${project?._id}`);
   };
 
-  const { data: hasRatings, status: ratingsStatus } = useQuery({
+  const { data: hasRatings } = useQuery({
     queryKey: [`Rating of ${project?._id}`],
     queryFn: GetProjectRatings,
   });
@@ -94,7 +91,7 @@ function ProjectCard({
 
   const { status: MakeReviewStatus, mutate: MakeReviewMutation } = useMutation({
     mutationFn: MakeReviewMF,
-    onSuccess: (data) => {
+    onSuccess: () => {
       QueryClient.invalidateQueries({ queryKey: ["AllProjects"] });
       setOpenReviewModal(false);
       setOpenSnack({
@@ -120,10 +117,10 @@ function ProjectCard({
     return useAxios.delete(`/project/removeProject/${project?._id}`);
   };
 
-  const { status: rmProjStatus, mutate: RemoveProjectMutatation } = useMutation(
+  const { mutate: RemoveProjectMutatation } = useMutation(
     {
       mutationFn: RemoveProject,
-      onSuccess: (data) => {
+      onSuccess: () => {
         QueryClient.invalidateQueries({ queryKey: ["allOpenProjects"] });
         setOpenSnack({
           open: true,

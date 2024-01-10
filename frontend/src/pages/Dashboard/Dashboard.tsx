@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/ui/Sidebar";
 import Appbar from "../../components/ui/Appbar";
@@ -10,8 +10,7 @@ import isXSmall from "../../utils/isXSmall";
 function Dashboard() {
   const { isXS } = isXSmall();
 
-  const { userData, setUserData }: UserDataContextTypes =
-    useContext(UserDataContext);
+  const { userData }: UserDataContextTypes = useContext(UserDataContext);
 
   const [openSidebar, setOpenSidebar]: any = useState(isXS ? "0vw" : "5vw");
   return (

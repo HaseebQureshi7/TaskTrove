@@ -13,7 +13,9 @@ import PageHeading from "../../components/PageHeading";
 function CompletedProjects() {
   // DISABLE BID BUTTON IF A BID IS ALREADY ADDED.
   const { userData }: UserDataContextTypes = useContext(UserDataContext);
+  // @ts-ignore
   const [openModal, setOpenModal] = useState(false);
+  // @ts-ignore
   const [currentProject, setCurrentProject] = useState<string | undefined>("");
 
   const GetAllOpenProjects = () => {

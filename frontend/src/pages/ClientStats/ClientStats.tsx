@@ -4,7 +4,6 @@ import {
   AttachMoney,
   FactCheck,
   FastForward,
-  Info,
   Inventory,
   Title,
 } from "@mui/icons-material";
@@ -33,7 +32,7 @@ import DarkModeContext from "../../context/DarkModeContext";
 function ClientStats() {
   const { userData }: UserDataContextTypes = useContext(UserDataContext);
   const { setOpenSnack }: SnackBarContextTypes = useContext(SnackbarContext);
-  const {themeMode} = useContext(DarkModeContext)
+  const { themeMode } = useContext(DarkModeContext);
 
   const queryClient = useQueryClient();
 
@@ -44,14 +43,13 @@ function ClientStats() {
     return useAxios.get(`project/viewAllClientsProjects/${userData?._id}`);
   };
 
-  const { data: allClientsProjects, status: allClientsProjectsStatus } =
-    useQuery({
-      queryKey: ["ClientProjects"],
-      queryFn: GetClientsProjects,
-      select: (data) => {
-        return data.data;
-      },
-    });
+  const { data: allClientsProjects } = useQuery({
+    queryKey: ["ClientProjects"],
+    queryFn: GetClientsProjects,
+    select: (data) => {
+      return data.data;
+    },
+  });
 
   const AddProjectMF = (projectData: ProjectTypes) => {
     return useAxios.post("project/addProject", projectData);
@@ -152,9 +150,7 @@ function ClientStats() {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <InputAdornment position="end">
-                    in Days
-                  </InputAdornment>
+                  <InputAdornment position="end">in Days</InputAdornment>
                 ),
               }}
               sx={{ width: "100%" }}
@@ -231,7 +227,8 @@ function ClientStats() {
               py: 2.5,
               gap: 1,
               borderRadius: 2.5,
-              border: themeMode === "dark" ? "5px solid black" : "5px solid white",
+              border:
+                themeMode === "dark" ? "5px solid black" : "5px solid white",
             }}
           >
             {/* stat-icon */}
@@ -245,7 +242,13 @@ function ClientStats() {
               <FactCheck
                 sx={{ width: 50, height: 50, color: "background.default" }}
               />
-              <Typography sx={{ color: "background.default", filter: themeMode === "light" ? "invert(100)" : "none" }} variant="h3">
+              <Typography
+                sx={{
+                  color: "background.default",
+                  filter: themeMode === "light" ? "invert(100)" : "none",
+                }}
+                variant="h3"
+              >
                 <AnimatedCounter
                   decimalPrecision={0}
                   fontSize="h3"
@@ -283,7 +286,8 @@ function ClientStats() {
               py: 2.5,
               gap: 1,
               borderRadius: 2.5,
-              border: themeMode === "dark" ? "5px solid black" : "5px solid white",
+              border:
+                themeMode === "dark" ? "5px solid black" : "5px solid white",
             }}
           >
             {/* stat-icon */}
@@ -297,7 +301,13 @@ function ClientStats() {
               <FastForward
                 sx={{ width: 50, height: 50, color: "background.default" }}
               />
-              <Typography sx={{ color: "background.default", filter: themeMode === "light" ? "invert(100)" : "none" }} variant="h3">
+              <Typography
+                sx={{
+                  color: "background.default",
+                  filter: themeMode === "light" ? "invert(100)" : "none",
+                }}
+                variant="h3"
+              >
                 <AnimatedCounter
                   decimalPrecision={0}
                   fontSize="h3"
@@ -335,7 +345,8 @@ function ClientStats() {
               py: 2.5,
               gap: 1,
               borderRadius: 2.5,
-              border: themeMode === "dark" ? "5px solid black" : "5px solid white",
+              border:
+                themeMode === "dark" ? "5px solid black" : "5px solid white",
             }}
           >
             {/* stat-icon */}
@@ -349,7 +360,13 @@ function ClientStats() {
               <Inventory
                 sx={{ width: 50, height: 50, color: "background.default" }}
               />
-              <Typography sx={{ color: "background.default", filter: themeMode === "light" ? "invert(100)" : "none" }} variant="h3">
+              <Typography
+                sx={{
+                  color: "background.default",
+                  filter: themeMode === "light" ? "invert(100)" : "none",
+                }}
+                variant="h3"
+              >
                 <AnimatedCounter
                   decimalPrecision={0}
                   fontSize="h3"

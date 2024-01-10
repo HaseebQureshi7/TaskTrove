@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   Box,
   Paper,
@@ -65,7 +65,9 @@ function AllFreelancers() {
       queryClient.invalidateQueries({ queryKey: ["AllFreelancers"] });
       setOpenSnack({
         open: true,
-        message: !selectedUser?.isBlocked ? "Freelancer was blocked!" : "Freelancer was unblocked!",
+        message: !selectedUser?.isBlocked
+          ? "Freelancer was blocked!"
+          : "Freelancer was unblocked!",
         severity: "info",
       });
     },
@@ -80,7 +82,11 @@ function AllFreelancers() {
     <Box
       sx={{ ...DFlex, alignItems: "flex-start", gap: 5, p: 2.5, width: "100%" }}
     >
-      <PageHeading heading={`All Freelancers (${allFreelancers?.length ? allFreelancers?.length : 0})`}/>
+      <PageHeading
+        heading={`All Freelancers (${
+          allFreelancers?.length ? allFreelancers?.length : 0
+        })`}
+      />
 
       {/* FREELANCERS CONTAINER */}
       <Box sx={{ ...DFlex, gap: 5, width: "100%" }}>

@@ -1,5 +1,4 @@
-import { Avatar, Box, ButtonBase, Divider, Typography } from "@mui/material";
-import { useContext } from "react";
+import { Avatar, Box, Divider, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import ClientLogo from "/images/client-logo.png";
 import FreelancerLogo from "/images/fl-logo.png";
@@ -9,7 +8,6 @@ import AdminLogo from "/images/admin-logo.png";
 import DFlex from "./../../styles/Flex";
 import {
   AccountTree,
-  Block,
   Dashboard as DashboardIcon,
   Engineering,
   PowerSettingsNew,

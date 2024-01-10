@@ -50,7 +50,7 @@ function AllProjects() {
 
   const { status, mutate } = useMutation({
     mutationFn: MakeABid,
-    onSuccess: (data) => {
+    onSuccess: () => {
       setOpenModal(false);
       setOpenSnack({
         open: true,

@@ -7,7 +7,6 @@ import UserDataContext from "./context/UserDataContext";
 import SnackbarContext from "./context/SnackbarContext";
 import { SnackbarTypes } from "./types/SnackbarTypes";
 import GlobalSnackbar from "./components/ui/Snackbar";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import DarkModeContext from "./context/DarkModeContext";
 import { Box, PaletteMode } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -90,7 +89,6 @@ function App() {
             </ThemeProvider>
           </SnackbarContext.Provider>
         </DarkModeContext.Provider>
-        {/* <ReactQueryDevtools /> */}
       </UserDataContext.Provider>
     </Box>
   );

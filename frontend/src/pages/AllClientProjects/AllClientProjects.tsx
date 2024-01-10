@@ -1,31 +1,20 @@
-import {
-  Box,
-  Button,
-  SnackbarContent,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import DFlex from "./../../styles/Flex";
 import ProjectCard from "../../components/ProjectCard";
 import useAxios from "../../hooks/useAxios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import ProjectTypes from "../../types/ProjectTypes";
-import GlobalModal from "../../components/ui/Modal";
-import { FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import UserDataContextTypes from "../../types/UserDataContextTypes";
 import UserDataContext from "../../context/UserDataContext";
-import { SnackBarContextTypes } from "../../types/SnackbarTypes";
-import SnackbarContext from "../../context/SnackbarContext";
-import BidTypes from "../../types/BidTypes";
 import { FadeFromSide } from "../../animations/PageTransition";
-import Typewriter from "react-ts-typewriter";
 import PageHeading from "../../components/PageHeading";
 
 function AllClientProjects() {
-  // DISABLE BID BUTTON IF A BID IS ALREADY ADDED.
   const { userData }: UserDataContextTypes = useContext(UserDataContext);
-  const { setOpenSnack }: SnackBarContextTypes = useContext(SnackbarContext);
+  // @ts-ignore
   const [openModal, setOpenModal] = useState(false);
+  // @ts-ignore
   const [currentProject, setCurrentProject] = useState<string | undefined>("");
 
   const GetAllClientProjects = () => {
@@ -44,14 +33,18 @@ function AllClientProjects() {
     <Box
       sx={{ ...DFlex, alignItems: "flex-start", gap: 5, p: 2.5, width: "100%" }}
     >
-      <PageHeading heading={`Your Projects (${allClientProjects?.length ? allClientProjects?.length : 0})`}/>
+      <PageHeading
+        heading={`Your Projects (${
+          allClientProjects?.length ? allClientProjects?.length : 0
+        })`}
+      />
 
       {/* PROJECTS CONTAINER */}
       <Box sx={{ ...DFlex, gap: 5, width: "100%" }}>
         {/* PROJECT CARD */}
-        {allClientProjects?.map((project: ProjectTypes, index:number) => {
+        {allClientProjects?.map((project: ProjectTypes, index: number) => {
           return (
-            <FadeFromSide delay={index/10}>
+            <FadeFromSide delay={index / 10}>
               <ProjectCard
                 key={project._id}
                 project={project}

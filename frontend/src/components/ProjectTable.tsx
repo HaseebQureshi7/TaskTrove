@@ -63,7 +63,7 @@ export default function ProjectTable({ projects }: ProjectTableProps) {
   const { status: editProjectStatus, mutate: EditProjectMutation } =
     useMutation({
       mutationFn: EditProjectMF,
-      onSuccess: (data) => {
+      onSuccess: () => {
         setOpenModal(!openModal);
         QueryClient.invalidateQueries({ queryKey: ["FreelancerProjects"] });
         setOpenSnack({
@@ -104,7 +104,7 @@ export default function ProjectTable({ projects }: ProjectTableProps) {
     return useAxios.delete(`/project/removeProject/${selectedProject?._id}`);
   };
 
-  const { status: rmProjStatus, mutate: RemoveProjectMutatation } = useMutation(
+  const { mutate: RemoveProjectMutatation } = useMutation(
     {
       mutationFn: RemoveProjectMF,
       onSuccess: () => {
