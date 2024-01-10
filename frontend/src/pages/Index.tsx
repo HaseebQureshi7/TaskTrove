@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Typewriter from "react-ts-typewriter";
 
 function Index() {
-  const { isXS } = isXSmall();
+  const { isXS, isSM, isMD } = isXSmall();
   const navigate = useNavigate();
 
   return (
@@ -73,12 +73,12 @@ function Index() {
               textAlign: "center",
               textShadow: "5px 5px 40px rgba(46, 123, 238, 1)",
             }}
-            variant={isXS ? "h5" : "h1"}
+            variant={isXS ? "h5" : isSM ? "h3" : isMD ?  "h2" : "h1"}
           >
             Catalyzing Success,
           </Typography>
           <Typography
-            variant={isXS ? "h5" : "h1"}
+            variant={isXS ? "h5" : isSM ? "h3" : isMD ?  "h2" : "h1"}
             sx={{
               color: "white",
               textAlign: "center",
@@ -123,12 +123,13 @@ function Index() {
             // size="small"
             sx={{
               backgroundColor: "rgb(217, 217, 217, 0.25)",
-              paddingX: 5,
+              paddingX: {xs:2.5,lg:5},
+              minWidth:"125px",
               borderRadius: 50,
               color: "white",
               border: "1px solid rgb(217, 217, 217, 0.85)",
               marginRight: 1,
-              marginTop: 1,
+              marginTop: 1
             }}
           >
             &nbsp; &nbsp; Client &nbsp; &nbsp;
@@ -141,6 +142,7 @@ function Index() {
             sx={{
               backgroundColor: "rgb(217, 217, 217, 0.25)",
               paddingX: 5,
+              minWidth:"125px",
               borderRadius: 50,
               color: "white",
               border: "1px solid rgb(217, 217, 217, 0.85)",
