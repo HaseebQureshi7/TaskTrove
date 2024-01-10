@@ -2,7 +2,8 @@ import axios from "axios";
 
 // Create an Axios instance with a base URL
 const useAxios = axios.create({
-  baseURL: "http://localhost:5000/",
+  // baseURL: "http://localhost:5000/",
+  baseURL: "https://tasktrove-be.onrender.com",
 });
 
 useAxios.interceptors.request.use(
