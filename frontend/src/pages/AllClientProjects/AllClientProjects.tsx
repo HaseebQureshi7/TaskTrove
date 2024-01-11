@@ -12,10 +12,8 @@ import PageHeading from "../../components/PageHeading";
 
 function AllClientProjects() {
   const { userData }: UserDataContextTypes = useContext(UserDataContext);
-  // @ts-ignore
-  const [openModal, setOpenModal] = useState(false);
-  // @ts-ignore
-  const [currentProject, setCurrentProject] = useState<string | undefined>("");
+  const [_openModal, setOpenModal] = useState(false);
+  const [_currentProject, setCurrentProject] = useState<string | undefined>("");
 
   const GetAllClientProjects = () => {
     return useAxios.get(`project/viewAllClientsProjects/${userData?._id}`);
