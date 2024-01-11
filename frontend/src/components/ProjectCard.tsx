@@ -89,6 +89,8 @@ function ProjectCard({
     mutationFn: MakeReviewMF,
     onSuccess: () => {
       QueryClient.invalidateQueries({ queryKey: ["AllProjects"] });
+      QueryClient.invalidateQueries({ queryKey: ["ClientProjects"] });
+      QueryClient.invalidateQueries({ queryKey: ["allClientProjects"] });
       setOpenReviewModal(false);
       setOpenSnack({
         open: true,

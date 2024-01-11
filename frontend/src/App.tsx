@@ -8,10 +8,11 @@ import SnackbarContext from "./context/SnackbarContext";
 import { SnackbarTypes } from "./types/SnackbarTypes";
 import GlobalSnackbar from "./components/ui/Snackbar";
 import DarkModeContext from "./context/DarkModeContext";
-import { Box, PaletteMode } from "@mui/material";
+import { Box, LinearProgress, PaletteMode } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import LoadingPage from "./pages/Loading/LoadingPage";
 import UserTypes from "./types/UserTypes";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 type UserDataStateTypes = {
   userData: UserTypes;
@@ -21,6 +22,7 @@ type UserDataStateTypes = {
 function App() {
   const [userData, setUserData] = useState<UserDataStateTypes>();
   const [initialLoading, setInitialLoading] = useState<Boolean>(false);
+  const [isServerSpooling, setIsServerSpooling] = useState<Boolean>(true);
   const [themeMode, setThemeMode] = useState<PaletteMode>("dark");
   const [openSnack, setOpenSnack] = useState<SnackbarTypes>({
     open: false,
@@ -31,10 +33,50 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isBaseRoute: boolean =
+    !location.pathname.includes("admin") &&
+    !location.pathname.includes("freelancer") &&
+    !location.pathname.includes("client");
+
   useEffect(() => {
     // THIS API PINGS THE SERVER SO THE SERVER CAN BOOT UP FROM THE SLEEP.
+    // const timeoutPromise: any = () =>
+    //   Promise.race([
+    //     useAxios("ping").then(() => {
+    //       setIsServerSpooling(false);
+    //     }),
+    //     new Promise(() =>
+    //       setTimeout(() => {
+    //         return "server still spooling"
+    //       }, 3000)
+    //     ),
+    //   ]);
+
+    // timeoutPromise()
+    if (isBaseRoute && isServerSpooling) {
+      setOpenSnack({
+        open: true,
+        message:
+          "Server is spooling up! Please wait until the loader on top is gone.",
+        severity: "info",
+      });
+    }
+
+    else {
+      setIsServerSpooling(false)
+    }
+
     useAxios("ping")
-      .then((res) => console.log(res.data))
+      .then(() => {
+        if (isBaseRoute) {
+          setIsServerSpooling(false);
+          setOpenSnack({
+            open: true,
+            message: "Server is now active!",
+            severity: "success",
+          });
+        }
+      })
       .catch((err) => console.log(err));
 
     // AUTO-LOGIN
@@ -50,11 +92,7 @@ function App() {
           setUserData(response.data.user);
           localStorage.setItem("token", response.data.token);
           setInitialLoading(false);
-          if (
-            !location.pathname.includes("admin") &&
-            !location.pathname.includes("freelancer") &&
-            !location.pathname.includes("client")
-          ) {
+          if (isBaseRoute) {
             navigate(`/${response.data.user.role}`);
           } else {
             console.log("on dashboard");
@@ -62,6 +100,9 @@ function App() {
         } catch (error: any) {
           console.log(error.message);
         }
+      }
+      else {
+        !isBaseRoute && navigate(`/`)
       }
     };
 
@@ -80,6 +121,13 @@ function App() {
         overflowX: "hidden",
       }}
     >
+      <LinearProgress
+        color="inherit"
+        sx={{
+          display: isServerSpooling ? "inherit" : "none",
+          backgroundColor: "white",
+        }}
+      />
       <UserDataContext.Provider value={{ userData, setUserData }}>
         <GlobalSnackbar value={{ openSnack, setOpenSnack }} />
         <DarkModeContext.Provider value={{ themeMode, setThemeMode }}>
@@ -90,6 +138,7 @@ function App() {
           </SnackbarContext.Provider>
         </DarkModeContext.Provider>
       </UserDataContext.Provider>
+      {/* <ReactQueryDevtools/> */}
     </Box>
   );
 }
